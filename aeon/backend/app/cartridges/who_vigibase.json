@@ -1,0 +1,15 @@
+{
+  "authority_code": "WHO_UMC",
+  "authority_name": "WHO / Uppsala Monitoring Centre — VigiBase (fallback for countries without a national portal)",
+  "country_code": "GLOBAL",
+  "version": "DRAFT-UNVERIFIED",
+  "status": "draft_placeholder",
+  "status_note": "UNVERIFIED. VigiBase aggregates data submitted by national pharmacovigilance centres — it is not typically a direct submission target for individual pharmacies/third-party software. This cartridge is a conceptual placeholder pending confirmation of any legitimate integration path.",
+  "output_format": "xml",
+  "field_mapping": {
+    "suspect_drugs[].drug_name": "icsr.drug.medicinalproduct",
+    "reaction.meddra_term": "icsr.reaction.meddrapt"
+  },
+  "submission_endpoint": "NOT CONFIGURED",
+  "auth_type": "unknown"
+}

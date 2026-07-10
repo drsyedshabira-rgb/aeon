@@ -1,0 +1,17 @@
+{
+  "authority_code": "EMA",
+  "authority_name": "European Medicines Agency — EudraVigilance",
+  "country_code": "EU",
+  "version": "DRAFT-UNVERIFIED",
+  "status": "draft_placeholder",
+  "status_note": "UNVERIFIED. EudraVigilance access is generally restricted to Marketing Authorisation Holders and national competent authorities via EVWEB/gateway, not open third-party submission. Real integration requires legal/regulatory review before any engineering work on this cartridge is meaningful.",
+  "output_format": "xml",
+  "field_mapping": {
+    "suspect_drugs[].drug_name": "icsr.drug.medicinalproduct",
+    "reaction.meddra_term": "icsr.reaction.meddraversion.reactionmeddrapt",
+    "patient_demographics.age_range": "icsr.patient.age",
+    "patient_demographics.sex": "icsr.patient.sex"
+  },
+  "submission_endpoint": "NOT CONFIGURED — access model unclear, needs legal review",
+  "auth_type": "unknown"
+}

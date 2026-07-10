@@ -1,0 +1,15 @@
+{
+  "authority_code": "NMPA",
+  "authority_name": "China National Medical Products Administration",
+  "country_code": "CN",
+  "version": "DRAFT-UNVERIFIED",
+  "status": "draft_placeholder",
+  "status_note": "UNVERIFIED. NMPA ADR reporting operates through China's national ADR monitoring system, generally requiring registered domestic reporting entities. Chinese-language fields and access model not researched. Very high uncertainty on this cartridge.",
+  "output_format": "xml",
+  "field_mapping": {
+    "suspect_drugs[].drug_name": "report.drug.name_cn",
+    "reaction.meddra_term": "report.reaction.term_cn"
+  },
+  "submission_endpoint": "NOT CONFIGURED",
+  "auth_type": "unknown"
+}

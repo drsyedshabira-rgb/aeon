@@ -1,0 +1,15 @@
+{
+  "authority_code": "PMDA",
+  "authority_name": "Japan Pharmaceuticals and Medical Devices Agency",
+  "country_code": "JP",
+  "version": "DRAFT-UNVERIFIED",
+  "status": "draft_placeholder",
+  "status_note": "UNVERIFIED. PMDA reporting workflows and language/format requirements (Japanese-language fields, specific reporter categories) have not been researched here. High-risk to assume a simple JSON/XML mapping suffices.",
+  "output_format": "xml",
+  "field_mapping": {
+    "suspect_drugs[].drug_name": "report.drug.name",
+    "reaction.meddra_term": "report.reaction.term_ja"
+  },
+  "submission_endpoint": "NOT CONFIGURED",
+  "auth_type": "unknown"
+}

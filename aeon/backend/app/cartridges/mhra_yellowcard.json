@@ -1,0 +1,17 @@
+{
+  "authority_code": "MHRA",
+  "authority_name": "UK Medicines and Healthcare products Regulatory Agency — Yellow Card",
+  "country_code": "GB",
+  "version": "DRAFT-UNVERIFIED",
+  "status": "draft_placeholder",
+  "status_note": "UNVERIFIED. Yellow Card scheme has a public web/app reporting form; whether a bulk/API submission path is open to third-party software has not been confirmed here. Verify against MHRA's published integration options before use.",
+  "output_format": "json",
+  "field_mapping": {
+    "suspect_drugs[].drug_name": "report.drug.name",
+    "reaction.meddra_term": "report.reaction.term",
+    "patient_demographics.age_range": "report.patient.age_band",
+    "patient_demographics.sex": "report.patient.sex"
+  },
+  "submission_endpoint": "NOT CONFIGURED",
+  "auth_type": "unknown"
+}
