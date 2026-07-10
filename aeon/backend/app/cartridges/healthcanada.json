@@ -1,0 +1,17 @@
+{
+  "authority_code": "HC",
+  "authority_name": "Health Canada — Canada Vigilance",
+  "country_code": "CA",
+  "version": "DRAFT-UNVERIFIED",
+  "status": "draft_placeholder",
+  "status_note": "UNVERIFIED. Canada Vigilance has an online reporting form; bulk/API submission path for third-party software not confirmed.",
+  "output_format": "json",
+  "field_mapping": {
+    "suspect_drugs[].drug_name": "report.product.name",
+    "reaction.meddra_term": "report.reaction.description",
+    "patient_demographics.age_range": "report.patient.age",
+    "patient_demographics.sex": "report.patient.sex"
+  },
+  "submission_endpoint": "NOT CONFIGURED",
+  "auth_type": "unknown"
+}

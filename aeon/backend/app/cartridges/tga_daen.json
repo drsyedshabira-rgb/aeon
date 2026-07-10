@@ -1,0 +1,17 @@
+{
+  "authority_code": "TGA",
+  "authority_name": "Australia Therapeutic Goods Administration — DAEN",
+  "country_code": "AU",
+  "version": "DRAFT-UNVERIFIED",
+  "status": "draft_placeholder",
+  "status_note": "UNVERIFIED. DAEN is primarily a published-data database; the actual adverse-event *submission* channel and any API availability need confirmation against TGA's current reporting guidance.",
+  "output_format": "json",
+  "field_mapping": {
+    "suspect_drugs[].drug_name": "report.medicine.name",
+    "reaction.meddra_term": "report.adverse_event.term",
+    "patient_demographics.age_range": "report.patient.age",
+    "patient_demographics.sex": "report.patient.gender"
+  },
+  "submission_endpoint": "NOT CONFIGURED",
+  "auth_type": "unknown"
+}

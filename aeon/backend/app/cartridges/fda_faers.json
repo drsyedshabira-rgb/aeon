@@ -1,0 +1,19 @@
+{
+  "authority_code": "FDA",
+  "authority_name": "U.S. Food and Drug Administration — FAERS",
+  "country_code": "US",
+  "version": "E2B-R3",
+  "status": "reference_only",
+  "status_note": "Structured per the public ICH E2B(R3) standard that FAERS is based on. This is a simplified illustrative mapping, NOT validated against FDA's actual Safety Reporting Portal / ESG gateway submission requirements. Verify against FDA's current technical specs before any real submission.",
+  "output_format": "xml",
+  "field_mapping": {
+    "suspect_drugs[].drug_name": "safetyreport.patient.drug.medicinalproduct",
+    "suspect_drugs[].dose": "safetyreport.patient.drug.drugdosagetext",
+    "reaction.meddra_term": "safetyreport.patient.reaction.reactionmeddrapt",
+    "reaction.seriousness": "safetyreport.serious",
+    "patient_demographics.age_range": "safetyreport.patient.patientagegroup",
+    "patient_demographics.sex": "safetyreport.patient.patientsex"
+  },
+  "submission_endpoint": "PLACEHOLDER — real submission requires FDA ESG (Electronic Submissions Gateway) registration",
+  "auth_type": "oauth2_client_credentials"
+}

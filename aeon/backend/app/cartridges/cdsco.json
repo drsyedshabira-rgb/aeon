@@ -1,0 +1,17 @@
+{
+  "authority_code": "CDSCO",
+  "authority_name": "India — IPC PvPI (Pharmacovigilance Programme of India)",
+  "country_code": "IN",
+  "version": "DRAFT-UNVERIFIED",
+  "status": "draft_placeholder",
+  "status_note": "UNVERIFIED. PvPI reporting typically routes through ADR monitoring centres / the VigiFlow-based national system; direct third-party API submission not confirmed.",
+  "output_format": "json",
+  "field_mapping": {
+    "suspect_drugs[].drug_name": "report.drug.name",
+    "reaction.meddra_term": "report.adr.description",
+    "patient_demographics.age_range": "report.patient.age",
+    "patient_demographics.sex": "report.patient.gender"
+  },
+  "submission_endpoint": "NOT CONFIGURED",
+  "auth_type": "unknown"
+}

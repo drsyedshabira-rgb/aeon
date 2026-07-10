@@ -1,0 +1,103 @@
+AEON Vertical Slice MVP — Test Commands
+=========================================
+
+0. Run it (local, no Docker):
+   pip install -r requirements.txt
+   python -m spacy download en_core_web_sm
+   uvicorn aeon_vertical_slice:app --reload
+
+   OR with Docker:
+   docker build -t aeon-mvp .
+   docker run -p 8000:8000 aeon-mvp
+
+
+1. Health check
+----------------
+curl http://localhost:8000/health
+
+Expected:
+{"status":"ok"}
+
+
+2. Submit a report — drug + reaction + age detected
+-----------------------------------------------------
+curl -X POST http://localhost:8000/process-text \
+  -H "Content-Type: application/json" \
+  -d '{
+        "text": "68 year old male patient developed a rash after starting amoxicillin for a sinus infection.",
+        "pharmacy_id": "demo"
+      }'
+
+Expected response (immediately):
+{
+  "report_id": "<uuid>",
+  "status": "pending_submission",
+  "extracted": {
+    "suspect_drugs": [{"drug_name": "Amoxicillin", "atc_code": null, "dose": null, "route": null}],
+    "reaction": {"meddra_term": "rash", "all_terms_detected": ["rash"], "seriousness": "non-serious", "outcome": "unknown"},
+    "patient_demographics": {"age": "68", "sex": "male"},
+    "confidence": 1.0
+  },
+  "xml_payload": "<?xml version=\"1.0\" ...>"
+}
+
+Watch the server console 3 seconds later for:
+=== FDA SUBMISSION ===
+<...XML...>
+=======================
+
+
+3. Check report status after submission completes
+----------------------------------------------------
+# Use the report_id returned from step 2
+curl http://localhost:8000/reports/<report_id>
+
+Expected (after ~3 seconds): "status": "submitted"
+Expected (if checked immediately): "status": "pending_submission"
+
+
+4. Multiple reactions detected
+--------------------------------
+curl -X POST http://localhost:8000/process-text \
+  -H "Content-Type: application/json" \
+  -d '{
+        "text": "Patient, age 45, female, reported nausea and dizziness after taking ciprofloxacin.",
+        "pharmacy_id": "pharmacy-042"
+      }'
+
+Expected: reaction.all_terms_detected = ["nausea", "dizziness"] (or similar order),
+          reaction.meddra_term = first match found
+
+
+5. No drug/reaction detected (low confidence)
+-------------------------------------------------
+curl -X POST http://localhost:8000/process-text \
+  -H "Content-Type: application/json" \
+  -d '{
+        "text": "Patient called to ask about refill timing.",
+        "pharmacy_id": "demo"
+      }'
+
+Expected: suspect_drugs = [], reaction = {}, confidence should be low (0.0–0.33
+          depending on whether demographics were found)
+
+
+6. Empty text — validation error
+------------------------------------
+curl -X POST http://localhost:8000/process-text \
+  -H "Content-Type: application/json" \
+  -d '{"text": "", "pharmacy_id": "demo"}'
+
+Expected: HTTP 422, {"detail": "text must not be empty"}
+
+
+NOTES
+-----
+- SQLite file `aeon_mvp.db` is created in the working directory on first run —
+  delete it to reset state between test sessions.
+- The 3-second delay is intentional (simulates async submission latency).
+  Poll /reports/<id> to observe the pending_submission -> submitted transition.
+- Drug/reaction detection is lexicon-based (MVP scope only) — it will only
+  match the specific antibiotic names and reaction words listed in the
+  blueprint's spec (COMMON_ANTIBIOTICS, REACTION_KEYWORDS). Anything outside
+  that list won't be detected; this is expected at this stage, not a bug.

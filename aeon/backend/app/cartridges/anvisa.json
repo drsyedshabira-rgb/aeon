@@ -1,0 +1,15 @@
+{
+  "authority_code": "ANVISA",
+  "authority_name": "Brazil ANVISA — Notivisa",
+  "country_code": "BR",
+  "version": "DRAFT-UNVERIFIED",
+  "status": "draft_placeholder",
+  "status_note": "UNVERIFIED. Notivisa is Brazil's national notification system; Portuguese-language field requirements and access model for third-party integration not researched.",
+  "output_format": "json",
+  "field_mapping": {
+    "suspect_drugs[].drug_name": "notificacao.medicamento.nome",
+    "reaction.meddra_term": "notificacao.evento.descricao"
+  },
+  "submission_endpoint": "NOT CONFIGURED",
+  "auth_type": "unknown"
+}

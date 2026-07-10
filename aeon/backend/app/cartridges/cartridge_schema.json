@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AEON Regulatory Cartridge Meta-Schema",
+  "type": "object",
+  "required": ["authority_code", "authority_name", "country_code", "version", "status", "output_format", "field_mapping"],
+  "properties": {
+    "authority_code": {"type": "string"},
+    "authority_name": {"type": "string"},
+    "country_code": {"type": "string", "minLength": 2},
+    "version": {"type": "string"},
+    "status": {"type": "string", "enum": ["reference_only", "draft_placeholder", "verified"]},
+    "status_note": {"type": "string"},
+    "output_format": {"type": "string", "enum": ["xml", "json"]},
+    "field_mapping": {"type": "object", "minProperties": 1},
+    "submission_endpoint": {"type": "string"},
+    "auth_type": {"type": "string"}
+  },
+  "additionalProperties": true
+}

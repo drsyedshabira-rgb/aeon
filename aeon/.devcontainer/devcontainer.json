@@ -1,0 +1,28 @@
+{
+  "name": "AEON Dev Environment",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "postCreateCommand": "pip install -r backend/requirements.txt && pip install bcrypt==3.2.2 && python -m spacy download en_core_web_sm",
+  "forwardPorts": [80, 8000, 3000, 5432, 6379],
+  "portsAttributes": {
+    "8000": {
+      "label": "AEON API",
+      "onAutoForward": "openPreview"
+    },
+    "3000": {
+      "label": "AEON Frontend",
+      "onAutoForward": "silent"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  },
+  "remoteUser": "vscode"
+}
