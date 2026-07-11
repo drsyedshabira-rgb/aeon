@@ -8,6 +8,14 @@ def test_fda_cartridge_loads_and_has_expected_shape():
     assert "field_mapping" in cartridge
 
 
+def test_pakistan_cartridge_loads_and_has_expected_shape():
+    cartridge = load_cartridge("pakistan")
+    assert cartridge["authority_code"] == "DRAP"
+    assert cartridge["country_code"] == "PK"
+    assert cartridge["status"] == "draft_placeholder"
+    assert "field_mapping" in cartridge
+
+
 def test_map_to_fda_faers_xml_contains_expected_tags(sample_extracted):
     xml = map_to_fda_faers_xml(
         report_id="test-report-123",
