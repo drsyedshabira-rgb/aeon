@@ -18,7 +18,7 @@ CARTRIDGE_DIR = Path(__file__).resolve().parents[1] / "app" / "cartridges"
 CARTRIDGE_FILES = [
     "fda_faers.json", "ema_eudravigilance.json", "mhra_yellowcard.json",
     "tga_daen.json", "pmda.json", "healthcanada.json", "anvisa.json",
-    "cdsco.json", "nmpa.json", "who_vigibase.json",
+    "cdsco.json", "nmpa.json", "who_vigibase.json", "pakistan.json",
 ]
 
 
