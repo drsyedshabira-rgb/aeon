@@ -1,5 +1,5 @@
 """
-Local mock FDA authority server for testing the submission pipeline
+Local mock authority server for testing the submission pipeline
 end-to-end without depending on a fake external domain.
 
 Behavior (controllable via query param, so you can test both paths):
@@ -9,7 +9,7 @@ Behavior (controllable via query param, so you can test both paths):
 """
 from fastapi import FastAPI, Request, Response
 
-app = FastAPI(title="Mock FDA Authority")
+app = FastAPI(title="Mock Authority")
 
 
 @app.post("/submit")
@@ -21,6 +21,14 @@ async def submit(request: Request):
         return Response(content="simulated server error", status_code=500)
     if fail_mode == "400":
         return Response(content="simulated bad request", status_code=400)
+
+    body_text = body.decode("utf-8", errors="ignore")
+    if "<drappayload" in body_text:
+        ack = (
+            "<ack><status>ACCEPTED</status><authority>DRAP</authority>"
+            f"<received_bytes>{len(body)}</received_bytes></ack>"
+        )
+        return Response(content=ack, media_type="application/xml", status_code=200)
 
     return Response(
         content=f"<ack><status>ACCEPTED</status><received_bytes>{len(body)}</received_bytes></ack>",

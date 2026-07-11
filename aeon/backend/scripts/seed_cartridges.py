@@ -33,10 +33,15 @@ def seed():
                 RegulatoryCartridge.authority_code == data["authority_code"],
                 RegulatoryCartridge.version == data["version"],
             ).first()
-            if exists:
-                continue
-
             is_reference_or_verified = data.get("status") in ("reference_only", "verified")
+
+            if exists:
+                exists.country_code = data["country_code"] if len(data["country_code"]) == 2 else "XX"
+                exists.field_mapping = data["field_mapping"]
+                exists.submission_endpoint = data.get("submission_endpoint")
+                exists.is_active = is_reference_or_verified
+                print(f"Updated {data['authority_code']} (active={is_reference_or_verified})")
+                continue
 
             db.add(RegulatoryCartridge(
                 authority_code=data["authority_code"],

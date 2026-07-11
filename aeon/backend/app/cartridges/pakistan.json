@@ -3,15 +3,15 @@
   "authority_name": "Drug Regulatory Authority of Pakistan — Yellow Form",
   "country_code": "PK",
   "version": "DRAFT-UNVERIFIED",
-  "status": "draft_placeholder",
-  "status_note": "UNVERIFIED. DRAP's national pharmacovigilance reporting workflow and any formal submission API or portal requirements for third-party software have not been confirmed here. This cartridge is a structural placeholder for Pakistan-specific intake mapping only.",
-  "output_format": "json",
+  "status": "reference_only",
+  "status_note": "Local development mock for DRAP Yellow Form payloads. This is a placeholder implementation for testing the integration flow and should not be treated as a verified live regulatory endpoint.",
+  "output_format": "xml",
   "field_mapping": {
     "suspect_drugs[].drug_name": "report.drug.name",
     "reaction.meddra_term": "report.reaction.term",
     "patient_demographics.age_range": "report.patient.age_band",
     "patient_demographics.sex": "report.patient.sex"
   },
-  "submission_endpoint": "NOT CONFIGURED",
-  "auth_type": "unknown"
+  "submission_endpoint": "http://mock_authority:8001/submit",
+  "auth_type": "none"
 }

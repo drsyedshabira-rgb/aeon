@@ -38,7 +38,8 @@ def create_report(
     extracted = extractor.extract(raw_text)
 
     org = db.query(Organization).filter(Organization.id == user["organization_id"]).first()
-    target_authority = _resolve_authority_for_country(db, org.country_code if org else "US")
+    country_code = (payload.country or (org.country_code if org else "US")).upper()
+    target_authority = _resolve_authority_for_country(db, country_code)
 
     report = AdrReport(
         organization_id=user["organization_id"],
@@ -108,15 +109,15 @@ def trigger_submission(report_id: str, db: Session = Depends(get_db), user: dict
 
 
 def _resolve_authority_for_country(db: Session, country_code: str) -> str:
-    mapping = {"US": "FDA"}  # only FDA is a real, working mapper at this time
+    mapping = {"US": "FDA", "PK": "DRAP"}
     authority = mapping.get(country_code)
     if not authority:
         raise HTTPException(
             status_code=422,
             detail=(
                 f"No verified regulatory cartridge available for country '{country_code}' yet. "
-                f"Only FDA (US) submission is currently functional; other cartridges are draft "
-                f"placeholders pending regulatory verification."
+                f"Only FDA (US) and DRAP (PK) submission routing is currently functional; "
+                f"other cartridges are draft placeholders pending regulatory verification."
             ),
         )
     return authority

@@ -6,6 +6,7 @@ class ReportCreateRequest(BaseModel):
     text: Optional[str] = None
     image_base64: Optional[str] = None
     pharmacy_id: Optional[str] = None
+    country: Optional[str] = None
 
 
 class ReportCreateResponse(BaseModel):

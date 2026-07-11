@@ -69,6 +69,14 @@ services:
       - "3000:3000"
     command: npm run dev
 
+  mock_authority:
+    build:
+      context: ../mock_authority
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    command: uvicorn main:app --host 0.0.0.0 --port 8001
+
   nginx:
     image: nginx:alpine
     volumes:
